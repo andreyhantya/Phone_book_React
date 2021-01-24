@@ -1,0 +1,51 @@
+.book-list{
+    border: 1px solid black;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.book-list__item {
+    display: flex;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 40px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.book-list__item:hover {
+    background-color: #ececec;
+}
+.contact-name {
+    align-self: center;
+    vertical-align: middle;
+    width: 20%;
+    text-align: center;
+}
+
+.contact-number{
+    width: 70%;
+    text-align: center;
+    align-self: center;
+
+}
+
+.delete-contact {
+    align-self: center;
+    width: 35px;
+    height: 35px;
+    background-color: #ee2d2d;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.delete-contact:hover{
+    background-color: #d63f3f;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
