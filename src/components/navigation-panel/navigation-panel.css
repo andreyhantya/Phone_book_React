@@ -1,0 +1,45 @@
+.navigation-panel__wrapper{
+}
+.navigation-panel__wrapper input{
+    width: 50%;
+    height: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: 1px solid #5d5959;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #6e88a5;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.status-message{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.errorMessage{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+    color: red;
+}
+.successMessage{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+    color: green;
+}
