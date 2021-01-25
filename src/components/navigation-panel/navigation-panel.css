@@ -1,45 +1,59 @@
 .navigation-panel__wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
+
 .navigation-panel__wrapper input{
-    width: 50%;
-    height: 30px;
+    height: 35px;
     padding-left: 10px;
     box-sizing: border-box;
-    border: 1px solid #5d5959;
-    border-radius: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;    transition-duration: 0.2s;
+
+    background-color: #f4f4ff;
 }
 
 .btn {
     width: 100%;
     height: 50px;
     border-radius: 10px;
-    background-color: #6e88a5;
+    background-color: #0075ff;
     border: none;
     outline: none;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    letter-spacing: 1px;
+    transition-duration: 0.3s;
+}
+.btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btn:hover {
+    letter-spacing: 1.5px;
+    border-radius: 15px;
+    background-color: #004dc4;
+    transition-duration: 0.3s;
 }
 
-.status-message{
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0;
+.navigation-panel__wrapper input.errorMessage{
+    transition-duration: 0.3s;
+    background-color: #ffeded;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.75);
+    -moz-box-shadow:    0px 0px 5px 0px rgba(255, 0, 0, 0.75);
+    box-shadow:         0px 0px 5px 0px rgba(255, 0, 0, 0.75);
 }
+.errorMessage::placeholder{
+    color: #ff6969;
 
-.errorMessage{
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    margin-top: 5px;
-    text-align: center;
-    color: red;
 }
-.successMessage{
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    margin-top: 5px;
-    text-align: center;
-    color: green;
+.navigation-panel__wrapper .successMessage{
+    transition-duration: 0.2s;
+    background-color: #edffef;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(0, 190, 21);
+    -moz-box-shadow:    0px 0px 5px 0px rgb(0, 190, 21);
+    box-shadow:         0px 0px 5px 0px rgb(0, 190, 21);
 }
