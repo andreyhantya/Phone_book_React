@@ -1,20 +1,59 @@
 .book-list{
-    border: 1px solid black;
+    border: 1px solid #a7a7a7;
     max-height: 300px;
     overflow-y: scroll;
+    min-height: 120px;
+    border-radius: 5px;
+    background-color: #eeeeee;
 }
 
 .book-list__item {
     display: flex;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
     height: 40px;
     vertical-align: middle;
     cursor: pointer;
+    overflow: hidden;
+    font-family: Arial,sans-serif;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 3px;
+
 }
+
 .book-list__item:hover {
-    background-color: #ececec;
+    background-color: #fcfcf6;
+    color: #303030;
+    font-weight: bold;
+    border: 1px solid #aba5a5;
 }
+
+
+.book-list::-webkit-scrollbar {
+    width:5px;
+    background-color: #eaeaea;
+
+}
+.book-list::-webkit-scrollbar-thumb {
+    background-color: #3c5eff;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #00a6ff;
+}
+
+.fa-trash-o{
+    font-size: 80%;
+    transition-duration: 0.1s;
+}
+
+
+.book-list__item:hover .delete-contact {
+    transform: translateX(0);
+    transition-duration: 0.5s;
+}
+ .delete-contact:hover .fa-trash-o{
+     font-size: 90%;
+ }
+
 .contact-name {
     align-self: center;
     vertical-align: middle;
@@ -33,19 +72,16 @@
     align-self: center;
     width: 35px;
     height: 35px;
-    background-color: #ee2d2d;
+    background-color: #812c2c;
     border: none;
     outline: none;
     color: #fff;
     font-size: 25px;
     cursor: pointer;
     border-radius: 4px;
-}
-.delete-contact:hover{
-    background-color: #d63f3f;
+    transform: translateX(40px);
 }
 
-.btn {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.delete-contact:hover{
+    background-color: #c80101;
 }

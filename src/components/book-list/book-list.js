@@ -3,6 +3,10 @@ import './book-list.css'
 
 export default class BookList extends Component {
 
+    deleteContact = (id) => {
+        return this.props.deleteContact(id);
+    }
+
 
     render() {
         const contacts = this.props.contacts.map(item => {
@@ -10,7 +14,7 @@ export default class BookList extends Component {
                 <div className='book-list__item' key={item.id}>
                     <div className='contact-name'>{item.name}</div>
                     <div className='contact-number'>{item.number}</div>
-                    <button className='delete-contact'>х</button>
+                    <button className='delete-contact' onClick={() => this.deleteContact(item.id)}> <i className='fa fa-trash-o'/></button>
                 </div>
             )
 

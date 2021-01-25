@@ -32,13 +32,11 @@ export default class NavigationPanel extends Component{
 
         if(name && number){
             this.props.addContact(name, number);
-            this.setState({statusMessage: 'Контакт добавлен'})
-            this.infoBlock += ' successMessage'
+            this.setState({statusMessage: 'successMessage'})
 
             this.deleteStatusMessage();
         }else{
-            this.setState({statusMessage: 'Заполните все поля'})
-            this.infoBlock = ' errorMessage'
+            this.setState({statusMessage: 'errorMessage'})
             this.deleteStatusMessage();
         }
     }
@@ -56,9 +54,8 @@ export default class NavigationPanel extends Component{
 
         return (
             <form action="" className='navigation-panel__wrapper'>
-                <input type="text" placeholder='Name' onChange={this.changeInputName}/>
-                <input type="text" placeholder='Number' onChange={this.changeInputNumber}/>
-                <div className={this.infoBlock}>{this.state.statusMessage}</div>
+                <input type="text" placeholder='Name' className={this.state.statusMessage} onChange={this.changeInputName}/>
+                <input type="text" placeholder='Number' className={this.state.statusMessage} onChange={this.changeInputNumber}/>
                 <button className='btn' onClick={this.addedContact}>Добавить</button>
             </form>
         );
