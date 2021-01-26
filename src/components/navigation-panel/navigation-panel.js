@@ -32,6 +32,7 @@ export default class NavigationPanel extends Component{
 
         if(name && number){
             this.props.addContact(name, number);
+            console.log(this.props.addContact(name, number));
             this.setState({statusMessage: 'successMessage'})
 
             this.deleteStatusMessage();
