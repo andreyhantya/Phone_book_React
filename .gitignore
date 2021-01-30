@@ -5,9 +5,11 @@
 /.pnp
 .pnp.js
 .idea
+.eslintcache
 # testing
 /coverage
-.eslintcache
+
+
 # production
 /build
 

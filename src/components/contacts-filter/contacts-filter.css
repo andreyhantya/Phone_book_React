@@ -1,0 +1,19 @@
+.contacts-filter {
+    height: 40px;
+    display: flex;
+}
+
+.contacts-filter-item{
+    text-align: center;
+    font-size: 15px;
+    font-family: Arial,sans-serif;
+    border: 1px solid #cbcbcb;
+    width: 100px;
+    padding-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0 ;
+}
+.contacts-filter-item:hover{
+    background-color: #ececec;
+}

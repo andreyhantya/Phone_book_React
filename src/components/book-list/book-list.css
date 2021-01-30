@@ -46,8 +46,8 @@
 }
 
 
-.book-list__item:hover .delete-contact {
-    transform: translateX(0);
+.book-list__item:hover .controls-wrapper  {
+    transform: translateX(-5px);
     transition-duration: 0.5s;
 }
  .delete-contact:hover .fa-trash-o{
@@ -69,19 +69,50 @@
 }
 
 .delete-contact {
-    align-self: center;
+   /* align-self: center;*/
+
+    background-color: #812c2c;
+
+   /* transform: translateX(40px);*/
+}
+
+.delete-contact, .favorite-contact{
     width: 35px;
     height: 35px;
-    background-color: #812c2c;
     border: none;
     outline: none;
     color: #fff;
     font-size: 25px;
     cursor: pointer;
     border-radius: 4px;
-    transform: translateX(40px);
+}
+
+.favorite-contact{
+    background-color: #594ddb;
+    color: #fff500;
+    font-size: 17px;
+    transition-duration: 0.2s;
+}
+
+.favorite-contact:hover {
+    background-color: #2e1edd;
+    color: #fff500;
+    font-size: 20px;
+}
+
+.controls-wrapper {
+    transform: translateX(80px);
+
+    display: flex;
+    width: 80px;
+    justify-content: space-between;
+    padding-top: 2px;
 }
 
 .delete-contact:hover{
     background-color: #c80101;
+}
+
+.contacts-filter-item .active-tab {
+    background-color: #fff;
 }
