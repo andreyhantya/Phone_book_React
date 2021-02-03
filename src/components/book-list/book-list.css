@@ -1,4 +1,4 @@
-.book-list{
+.book-list {
     border: 1px solid #a7a7a7;
     max-height: 300px;
     overflow-y: scroll;
@@ -13,12 +13,11 @@
     vertical-align: middle;
     cursor: pointer;
     overflow: hidden;
-    font-family: Arial,sans-serif;
+    font-family: Arial, sans-serif;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
     border-radius: 5px;
     margin-bottom: 3px;
-
 }
 
 .book-list__item:hover {
@@ -30,29 +29,30 @@
 
 
 .book-list::-webkit-scrollbar {
-    width:5px;
+    width: 5px;
     background-color: #eaeaea;
-
 }
+
 .book-list::-webkit-scrollbar-thumb {
     background-color: #3c5eff;
     border-radius: 9em;
     box-shadow: inset 1px 1px 10px #00a6ff;
 }
 
-.fa-trash-o{
+.fa-trash-o {
     font-size: 80%;
     transition-duration: 0.1s;
 }
 
 
-.book-list__item:hover .controls-wrapper  {
+.book-list__item:hover .controls-wrapper {
     transform: translateX(-5px);
     transition-duration: 0.5s;
 }
- .delete-contact:hover .fa-trash-o{
-     font-size: 90%;
- }
+
+.delete-contact:hover .fa-trash-o {
+    font-size: 90%;
+}
 
 .contact-name {
     align-self: center;
@@ -61,22 +61,17 @@
     text-align: center;
 }
 
-.contact-number{
+.contact-number {
     width: 70%;
     text-align: center;
     align-self: center;
-
 }
 
 .delete-contact {
-   /* align-self: center;*/
-
     background-color: #812c2c;
-
-   /* transform: translateX(40px);*/
 }
 
-.delete-contact, .favorite-contact{
+.delete-contact, .favorite-contact {
     width: 35px;
     height: 35px;
     border: none;
@@ -87,7 +82,7 @@
     border-radius: 4px;
 }
 
-.favorite-contact{
+.favorite-contact {
     background-color: #594ddb;
     color: #fff500;
     font-size: 17px;
@@ -102,14 +97,13 @@
 
 .controls-wrapper {
     transform: translateX(80px);
-
     display: flex;
     width: 80px;
     justify-content: space-between;
     padding-top: 2px;
 }
 
-.delete-contact:hover{
+.delete-contact:hover {
     background-color: #c80101;
 }
 

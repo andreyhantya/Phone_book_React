@@ -7,11 +7,9 @@ export default class BookList extends Component {
         return this.props.deleteContact(id);
     }
 
-
     favoriteContact = (id) => {
         return this.props.favoriteContact(id);
     }
-
 
     render() {
         const contacts = this.props.contacts.map(item => {
@@ -27,6 +25,8 @@ export default class BookList extends Component {
             )
 
         })
+
+
         return (
             <div className='book-list'>
                 {contacts}

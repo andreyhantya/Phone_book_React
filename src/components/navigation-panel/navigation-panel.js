@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import './navigation-panel.css';
 
-export default class NavigationPanel extends Component{
+export default class NavigationPanel extends Component {
 
 
     state = {
-        name: '',
-        number : '',
+        name:          '',
+        number:        '',
         statusMessage: ''
     }
 
     changeInputName = (e) => {
         this.setState(() => {
             return {
-                name : e.target.value
+                name: e.target.value
             }
         })
     }
@@ -21,7 +21,7 @@ export default class NavigationPanel extends Component{
     changeInputNumber = (e) => {
         this.setState(() => {
             return {
-                number : e.target.value
+                number: e.target.value
             }
         })
     }
@@ -30,16 +30,17 @@ export default class NavigationPanel extends Component{
         const {name, number} = this.state;
         e.preventDefault()
 
-        if(name && number){
+        if (name && number) {
             this.props.addContact(name, number);
             console.log(this.props.addContact(name, number));
             this.setState({statusMessage: 'successMessage'})
 
-            this.deleteStatusMessage();
-        }else{
+        } else {
             this.setState({statusMessage: 'errorMessage'})
-            this.deleteStatusMessage();
+
         }
+        this.deleteStatusMessage();
+
     }
 
     deleteStatusMessage = () => {
@@ -48,15 +49,15 @@ export default class NavigationPanel extends Component{
         }, 2000);
     }
 
-    infoBlock = 'status-message';
-
 
     render() {
 
         return (
             <form action="" className='navigation-panel__wrapper'>
-                <input type="text" placeholder='Name' className={this.state.statusMessage} onChange={this.changeInputName}/>
-                <input type="text" placeholder='Number' className={this.state.statusMessage} onChange={this.changeInputNumber}/>
+                <input type="text" placeholder='Name' className={this.state.statusMessage}
+                       onChange={this.changeInputName}/>
+                <input type="text" placeholder='Number' className={this.state.statusMessage}
+                       onChange={this.changeInputNumber}/>
                 <button className='btn' onClick={this.addedContact}>Добавить</button>
             </form>
         );
