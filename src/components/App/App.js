@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
-import './app.css'
-import NavigationPanel from "../navigation-panel/navigation-panel";
-import BookList from "../book-list/book-list";
-import ContactCounter from "../contact-counter/contact-counter";
-import SearchInput from "../search-input/search-input";
-import ContactsFilter from "../contacts-filter/contacts-filter";
+import './App.css'
+import NavigationPanel from "../Navigation-panel/Navigation-panel";
+import BookList from "../Book-list/Book-list";
+import ContactCounter from "../Contact-counter/Contact-counter";
+import SearchInput from "../Search-input/Search-input";
+import ContactsFilter from "../Contacts-filter/Contacts-filter";
 
 
 export default class App extends Component {
-
-    maxId = 0;
 
     state = {
         contacts:       [],
         contactCounter: 0,
         searchValue:    '',
         favorite:       [],
-        favoriteTab:    false
+        favoriteTab:    false,
+        maxId:          0
     }
 
     addContact = (name, number) => {
@@ -30,20 +29,23 @@ export default class App extends Component {
             const newContact = {
                 name: name,
                 number: number,
-                id: this.maxId++
+                id: this.state.maxId++
             }
 
-            this.contactCounter(contactCounter.length);
+            const contacts = [...contacts, newContact];
 
-            this.setState(() => {
-                return {
-                    contacts: [...contacts,
-                        newContact
-                    ],
-                    contactCounter: contactCounter + 1,
-                    searchValue: ''
-                }
-            })
+            this.changeState({contacts,contactCounter})
+
+
+            /* this.setState(() => {
+                 return {
+                     contacts: [...contacts,
+                         newContact
+                     ],
+                     contactCounter: contactCounter + 1,
+                     searchValue: ''
+                 }
+             })*/
         } else {
             return false;
         }
@@ -51,22 +53,42 @@ export default class App extends Component {
 
     };
 
-    contactCounter = (count) => {
-        return this.setState({contactCounter: count - 1})
+     changeState (newState)  {
+
+             //...arguments.map(elem => newState.elem = elem);
+
+        console.log(newState)
+     /*  this.setState({
+            [contacts]       :   contacts,
+            [contactCounter] :   contactCounter,
+            [searchValue]    :   searchValue,
+            [favorite]       :   favorite,
+            [favoriteTab]    :   favoriteTab,
+
+
+
+        })*/
     }
 
     deleteContact = (id) => {
         const {contacts, contactCounter} = this.state;
         const idx = contacts.findIndex(el => el.id === id);
 
-        this.contactCounter(contactCounter.length);
+        const newValue = [...contacts.slice(0, idx),
+            ...contacts.slice(idx + 1)]
+
+        //this.changeState(newValue,contactCounter - 1,'')
+
+
+
+        this.changeState({newValue,contactCounter})
+/*
         this.setState({
             contacts: [...contacts.slice(0, idx),
                 ...contacts.slice(idx + 1)],
             contactCounter: contactCounter - 1,
             searchValue: ''
-
-        })
+        })*/
     }
 
     searchContact = (e) => {
@@ -99,12 +121,11 @@ export default class App extends Component {
         const {contacts, contactCounter, favorite} = this.state;
         const idx = contacts.findIndex(el => el.id === id);
 
-        this.contactCounter(contactCounter.length);
         this.setState({
             favorite: [...favorite.slice(0, idx),
                 contacts[idx]],
+            contactCounter: contactCounter.length
         })
-
     }
     showFavoriteContacts = () => {
         this.setState({favoriteTab: true})
@@ -138,17 +159,17 @@ export default class App extends Component {
     }
 
     render() {
-        const {searchValue} = this.state;
-
-        const visible = this.displayItems(searchValue);
-
+        const {searchValue,favoriteTab} = this.state;
+        let q = 2;
+        console.log(this.changeState({q}))
         return (
             <div className='phone-book__wrapper'>
                 <NavigationPanel addContact={(name, number) => this.addContact(name, number)}/>
                 <ContactCounter contactCounter={this.getCounter()}/>
                 <ContactsFilter showFavoriteContacts={this.showFavoriteContacts}
-                                showAllContacts={this.showAllContacts}/>
-                <BookList contacts={visible}
+                                showAllContacts={this.showAllContacts}
+                                favoriteTab={favoriteTab}/>
+                <BookList contacts={this.displayItems(searchValue)}
                           deleteContact={this.deleteContact}
                           favoriteContact={this.favoriteContact}/>
                 <SearchInput searchContact={this.searchContact}/>

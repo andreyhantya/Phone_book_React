@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './navigation-panel.css';
+import './Navigation-panel.css';
 
 export default class NavigationPanel extends Component {
 

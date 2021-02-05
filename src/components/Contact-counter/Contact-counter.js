@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import './contact-counter.css';
+import './Contact-counter.css';
+
 export default class ContactCounter extends Component{
 
   getNoun = (number, one, two, five) =>{
-        let n = Math.abs(number);
-        n %= 100;
-        if (n >= 5 && n <= 20) {
+        let num = Math.abs(number);
+            num %= 100;
+        if (num >= 5 && num <= 20) {
             return five;
         }
-        n %= 10;
-        if (n === 1) {
+            num %= 10;
+        if (num === 1) {
             return one;
         }
-        if (n >= 2 && n <= 4) {
+        if (num >= 2 && num <= 4) {
             return two;
         }
 
@@ -22,7 +23,7 @@ export default class ContactCounter extends Component{
 
 
     render() {
-        let contact = this.getNoun(this.props.contactCounter, 'контакт', 'контакта', 'контактов' );
+        const contact = this.getNoun(this.props.contactCounter, 'контакт', 'контакта', 'контактов' );
 
         return (
             <div className='contact-counter'>
