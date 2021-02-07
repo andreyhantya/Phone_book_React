@@ -1,16 +1,16 @@
-.navigation-panel__wrapper{
+.navigation-panel__form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.navigation-panel__wrapper input{
+.navigation-panel__form input {
     height: 35px;
     padding-left: 10px;
     box-sizing: border-box;
     border: 1px solid #ffffff;
-    border-radius: 5px;    transition-duration: 0.2s;
-
+    border-radius: 5px;
+    transition-duration: 0.2s;
     background-color: #f4f4ff;
 }
 
@@ -28,10 +28,12 @@
     letter-spacing: 1px;
     transition-duration: 0.3s;
 }
+
 .btn {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .btn:hover {
     letter-spacing: 1.5px;
     border-radius: 15px;
@@ -39,21 +41,40 @@
     transition-duration: 0.3s;
 }
 
-.navigation-panel__wrapper input.errorMessage{
+.navigation-panel__form input.errorMessage {
     transition-duration: 0.3s;
     background-color: #ffeded;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.75);
-    -moz-box-shadow:    0px 0px 5px 0px rgba(255, 0, 0, 0.75);
-    box-shadow:         0px 0px 5px 0px rgba(255, 0, 0, 0.75);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 0, 0, 0.75);
+    box-shadow: 0 0 5px 0 rgba(255, 0, 0, 0.75);
 }
-.errorMessage::placeholder{
-    color: #ff6969;
 
+.errorMessage::placeholder {
+    color: #ff6969;
 }
-.navigation-panel__wrapper .successMessage{
+
+.navigation-panel__form .successMessage {
     transition-duration: 0.2s;
     background-color: #edffef;
-    -webkit-box-shadow: 0px 0px 5px 0px rgb(0, 190, 21);
-    -moz-box-shadow:    0px 0px 5px 0px rgb(0, 190, 21);
-    box-shadow:         0px 0px 5px 0px rgb(0, 190, 21);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0, 190, 21);
+    -moz-box-shadow: 0 0 5px 0 rgb(0, 190, 21);
+    box-shadow: 0 0 5px 0 rgb(0, 190, 21);
+}
+
+.error-message {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: red;
+    height: 20px;
+    line-height: 15px;
+}
+
+.success-message {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: green;
+    height: 20px;
+    line-height: 15px;
 }

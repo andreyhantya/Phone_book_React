@@ -1,111 +1,77 @@
 import React, {Component} from 'react';
+import NavigationPanel    from '../Navigation-panel/Navigation-panel';
+import BookList           from '../Book-list/Book-list';
+import ContactCounter     from '../Contact-counter/Contact-counter';
+import SearchInput        from '../Search-input/Search-input';
+import ContactsFilter     from '../Contacts-filter/Contacts-filter';
 import './App.css'
-import NavigationPanel from "../Navigation-panel/Navigation-panel";
-import BookList from "../Book-list/Book-list";
-import ContactCounter from "../Contact-counter/Contact-counter";
-import SearchInput from "../Search-input/Search-input";
-import ContactsFilter from "../Contacts-filter/Contacts-filter";
 
 
 export default class App extends Component {
 
     state = {
-        contacts:       [],
-        contactCounter: 0,
-        searchValue:    '',
-        favorite:       [],
-        favoriteTab:    false,
-        maxId:          0
+        contactCounter : 0,
+        searchValue    : '',
+        favoriteTab    : false,
+        contacts       : [],
+        favorite       : [],
+        maxId          : 0
     }
 
     addContact = (name, number) => {
         const {contacts, contactCounter} = this.state;
 
-        const duplicate = contacts.every(el => {
-            return el.number !== number && el.name !== name
-        })
-
-        if (duplicate) {
             const newContact = {
-                name: name,
-                number: number,
-                id: this.state.maxId++
+                number  : number,
+                name    : name,
+                id      : this.state.maxId++
             }
 
-            const contacts = [...contacts, newContact];
-
-            this.changeState({contacts,contactCounter})
-
-
-            /* this.setState(() => {
+             this.setState(() => {
                  return {
                      contacts: [...contacts,
-                         newContact
+                                newContact
                      ],
-                     contactCounter: contactCounter + 1,
-                     searchValue: ''
+                     contactCounter : contactCounter + 1,
+                     searchValue    : ''
                  }
-             })*/
-        } else {
-            return false;
+             })
+    };
+
+
+    deleteContact = (id) => {
+        const {contacts, contactCounter, favoriteTab, favorite} = this.state;
+        const item = contacts.find(el => el.id === id);
+
+        if(favoriteTab){
+            this.setState({
+                contactCounter : contactCounter - 1,
+                searchValue    : '',
+                favorite       : [...favorite.filter(it => it !== item)]
+            })
+        }else{
+            this.setState({
+                contactCounter : contactCounter - 1,
+                searchValue    : '',
+                contacts       : [...contacts.filter(it => it !== item)]
+            })
         }
 
 
-    };
-
-     changeState (newState)  {
-
-             //...arguments.map(elem => newState.elem = elem);
-
-        console.log(newState)
-     /*  this.setState({
-            [contacts]       :   contacts,
-            [contactCounter] :   contactCounter,
-            [searchValue]    :   searchValue,
-            [favorite]       :   favorite,
-            [favoriteTab]    :   favoriteTab,
-
-
-
-        })*/
     }
 
-    deleteContact = (id) => {
-        const {contacts, contactCounter} = this.state;
-        const idx = contacts.findIndex(el => el.id === id);
 
-        const newValue = [...contacts.slice(0, idx),
-            ...contacts.slice(idx + 1)]
+    searchContact = (text) => {
+        const { contacts, favoriteTab, favorite } = this.state;
 
-        //this.changeState(newValue,contactCounter - 1,'')
-
-
-
-        this.changeState({newValue,contactCounter})
-/*
-        this.setState({
-            contacts: [...contacts.slice(0, idx),
-                ...contacts.slice(idx + 1)],
-            contactCounter: contactCounter - 1,
-            searchValue: ''
-        })*/
-    }
-
-    searchContact = (e) => {
-        const {contacts, favoriteTab, favorite} = this.state;
-
-        if (e) {
-
+        if (text) {
             if (favoriteTab) {
-                let idx = favorite.filter(el => el.name.indexOf(e) !== -1);
-
                 this.setState({
-                    searchValue: [...idx]
+                    searchValue: [...favorite.filter(el => el.name.indexOf(text) !== -1)]
                 })
             } else {
-                let idx = contacts.filter(el => el.name.indexOf(e) !== -1);
                 this.setState({
-                    searchValue: [...idx]
+                    searchValue: [...contacts.filter(el => el.name.indexOf(text) !== -1)]
                 })
             }
         } else {
@@ -113,9 +79,8 @@ export default class App extends Component {
                 searchValue: ''
             })
         }
-
-
     }
+
 
     favoriteContact = (id) => {
         const {contacts, contactCounter, favorite} = this.state;
@@ -127,14 +92,12 @@ export default class App extends Component {
             contactCounter: contactCounter.length
         })
     }
-    showFavoriteContacts = () => {
-        this.setState({favoriteTab: true})
+
+
+    changeTab = () => {
+        this.setState({favoriteTab: !this.state.favoriteTab})
     }
 
-    showAllContacts = () => {
-        this.setState({favoriteTab: false})
-
-    }
 
     displayItems = (searchValue) => {
         if (searchValue) {
@@ -145,6 +108,7 @@ export default class App extends Component {
             return this.state.contacts;
         }
     }
+
 
     getCounter = () => {
         const {favorite, searchValue, favoriteTab, contacts} = this.state;
@@ -158,20 +122,21 @@ export default class App extends Component {
         }
     }
 
+
     render() {
-        const {searchValue,favoriteTab} = this.state;
-        let q = 2;
-        console.log(this.changeState({q}))
+        const {searchValue,favoriteTab, contacts} = this.state;
+
         return (
             <div className='phone-book__wrapper'>
-                <NavigationPanel addContact={(name, number) => this.addContact(name, number)}/>
+                <NavigationPanel addContact={(name, number) => this.addContact(name, number)}
+                                contacts={contacts}/>
                 <ContactCounter contactCounter={this.getCounter()}/>
-                <ContactsFilter showFavoriteContacts={this.showFavoriteContacts}
-                                showAllContacts={this.showAllContacts}
+                <ContactsFilter changeTab={this.changeTab}
                                 favoriteTab={favoriteTab}/>
                 <BookList contacts={this.displayItems(searchValue)}
                           deleteContact={this.deleteContact}
-                          favoriteContact={this.favoriteContact}/>
+                          favoriteContact={this.favoriteContact}
+                          favoriteTab={favoriteTab}/>
                 <SearchInput searchContact={this.searchContact}/>
             </div>
         );

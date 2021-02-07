@@ -13,9 +13,12 @@ export default class SearchInput extends Component {
 
     render() {
         return(
-            <div>
-                <input type="text" className='search-input' placeholder='Поиск... ' onChange={this.changeSearchValue}/>
-            </div>
+            <React.Fragment>
+                <input type="text"
+                       className='search-input'
+                       placeholder='Поиск... '
+                       onChange={this.changeSearchValue}/>
+            </React.Fragment>
         )
     }
 }

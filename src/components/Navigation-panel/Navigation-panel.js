@@ -5,42 +5,77 @@ export default class NavigationPanel extends Component {
 
 
     state = {
-        name:          '',
-        number:        '',
-        statusMessage: ''
+        statusMessage : '',
+        showMessage   : '',
+        isValid       : false,
+        number        : '',
+        name          : ''
     }
 
-    changeInputName = (e) => {
+
+    changeInput = (e) => {
+        let input = e.target.name === 'contactName' ? 'name' : 'number';
+
         this.setState(() => {
             return {
-                name: e.target.value
+                [input] : e.target.value
             }
         })
     }
 
-    changeInputNumber = (e) => {
-        this.setState(() => {
-            return {
-                number: e.target.value
-            }
-        })
+    validation = (number) => {
+        const regNum = new RegExp('^\\d+$');
+
+        if(!!regNum.exec(number)){
+            this.setState({
+                showMessage : 'Контакт добавлен',
+                isValid     : true
+            })
+            return true;
+        }else{
+            this.setState({
+                showMessage : 'Укажите корректный номер телефона!',
+                isValid     : false
+            })
+            return false;
+        }
+
     }
+
 
     addedContact = (e) => {
-        const {name, number} = this.state;
         e.preventDefault()
 
-        if (name && number) {
+        const {name, number} = this.state;
+        const { contacts } = this.props;
+
+        const duplicate = contacts.every(el => {
+            return el.number !== number && el.name !== name;
+        })
+
+        if(!duplicate){
+            this.setState({
+                showMessage : 'Такой пользователь уже существует!',
+                isValid     : false
+            })
+        }else if (this.validation(number) && duplicate) {
             this.props.addContact(name, number);
-            console.log(this.props.addContact(name, number));
-            this.setState({statusMessage: 'successMessage'})
+
+            this.setState({
+                showMessage   : 'Контакт добавлен',
+                statusMessage : 'successMessage',
+                name          : '',
+                number        : '',
+                isValid       : true
+            })
 
         } else {
-            this.setState({statusMessage: 'errorMessage'})
-
+            this.setState({
+                statusMessage : 'errorMessage'
+            })
         }
-        this.deleteStatusMessage();
 
+        this.deleteStatusMessage();
     }
 
     deleteStatusMessage = () => {
@@ -51,15 +86,28 @@ export default class NavigationPanel extends Component {
 
 
     render() {
+        const {statusMessage, name, number, showMessage, isValid} = this.state;
+        const valid = isValid ? 'success-message' : 'error-message'
 
         return (
-            <form action="" className='navigation-panel__wrapper'>
-                <input type="text" placeholder='Name' className={this.state.statusMessage}
-                       onChange={this.changeInputName}/>
-                <input type="text" placeholder='Number' className={this.state.statusMessage}
-                       onChange={this.changeInputNumber}/>
-                <button className='btn' onClick={this.addedContact}>Добавить</button>
-            </form>
+            <div className='navigation-panel__wrapper'>
+                <p className={valid}>{showMessage}</p>
+                <form action="" className='navigation-panel__form'>
+                    <input type="text"
+                           name='contactName'
+                           placeholder='Name'
+                           className={statusMessage}
+                           onChange={this.changeInput}
+                           value={name}/>
+                    <input type="text"
+                           name='contactNumber'
+                           placeholder='Number'
+                           className={statusMessage}
+                           onChange={this.changeInput}
+                           value={number}/>
+                    <button className='btn' onClick={this.addedContact}>Добавить</button>
+                </form>
+            </div>
         );
     }
 }

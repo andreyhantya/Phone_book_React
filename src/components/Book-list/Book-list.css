@@ -7,6 +7,11 @@
     background-color: #eeeeee;
 }
 
+.book-list::-webkit-scrollbar {
+    width: 5px;
+    background-color: #eaeaea;
+}
+
 .book-list__item {
     display: flex;
     height: 40px;
@@ -27,10 +32,9 @@
     border: 1px solid #aba5a5;
 }
 
-
-.book-list::-webkit-scrollbar {
-    width: 5px;
-    background-color: #eaeaea;
+.book-list__item:hover .controls-wrapper {
+    transform: translateX(-5px);
+    transition-duration: 0.5s;
 }
 
 .book-list::-webkit-scrollbar-thumb {
@@ -42,12 +46,6 @@
 .fa-trash-o {
     font-size: 80%;
     transition-duration: 0.1s;
-}
-
-
-.book-list__item:hover .controls-wrapper {
-    transform: translateX(-5px);
-    transition-duration: 0.5s;
 }
 
 .delete-contact:hover .fa-trash-o {
@@ -98,8 +96,9 @@
 .controls-wrapper {
     transform: translateX(80px);
     display: flex;
-    width: 80px;
-    justify-content: space-between;
+    max-width: 80px;
+    width: 100%;
+    justify-content: space-around;
     padding-top: 2px;
 }
 
@@ -109,4 +108,8 @@
 
 .contacts-filter-item .active-tab {
     background-color: #fff;
+}
+
+.hide {
+    display: none;
 }

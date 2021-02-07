@@ -3,14 +3,14 @@ import './Contacts-filter.css'
 
 function ContactsFilter (props) {
 
-    const { favoriteTab, showFavoriteContacts, showAllContacts } = props;
+    const { favoriteTab, changeTab } = props;
     const isAll = !favoriteTab ?      'contacts-filter-item active' : 'contacts-filter-item';
     const isFavorite =  favoriteTab ? 'contacts-filter-item active' : 'contacts-filter-item';
 
     return(
             <div className='contacts-filter'>
-                <div className={isAll} onClick={showAllContacts}>Все</div>
-                <div className={isFavorite} onClick={showFavoriteContacts}>Избранные</div>
+                <div className={isAll} onClick={changeTab}>Все</div>
+                <div className={isFavorite} onClick={changeTab}>Избранные</div>
             </div>
     )
 }
