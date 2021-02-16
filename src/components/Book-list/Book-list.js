@@ -3,30 +3,29 @@ import './Book-list.css'
 
 
 
-export default class BookList extends Component {
+function BookList (props){
 
-    deleteContact = (id) => {
-        return this.props.deleteContact(id);
+   const deleteContact = (id) => {
+        return props.deleteContact(id);
     }
 
-    favoriteContact = (id) => {
-        return this.props.favoriteContact(id);
+    const favoriteContact = (id) => {
+        return props.favoriteContact(id);
     }
 
-    render() {
-        const hideFavoriteButton = this.props.favoriteTab ? 'favorite-contact hide' : 'favorite-contact'
+        const hideFavoriteButton = props.favoriteTab ? 'favorite-contact hide' : 'favorite-contact'
 
-        const contacts = this.props.contacts.map(item => {
+        const contacts = props.contacts.map(item => {
             return (
                 <div className='book-list__item' key={item.id}>
                     <div className='contact-name'>{item.name}</div>
                     <div className='contact-number'>{item.number}</div>
                     <div className='controls-wrapper'>
                         <button className='delete-contact'
-                                onClick={() => this.deleteContact(item.id)}>
+                                onClick={() => deleteContact(item.id)}>
                             <i className='fa fa-trash-o'/>
                         </button>
-                        <button className={hideFavoriteButton} onClick={() => this.favoriteContact(item.id)}>
+                        <button className={hideFavoriteButton} onClick={() => favoriteContact(item.id)}>
                             <i className='fa fa-star'/>
                         </button>
                     </div>
@@ -39,5 +38,7 @@ export default class BookList extends Component {
                 {contacts}
             </div>
         );
-    }
+
 }
+
+export default BookList;

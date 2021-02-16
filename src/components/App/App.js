@@ -38,7 +38,6 @@ export default class App extends Component {
              })
     };
 
-
     deleteContact = (id) => {
         const {contacts, contactCounter, favoriteTab, favorite} = this.state;
         const item = contacts.find(el => el.id === id);

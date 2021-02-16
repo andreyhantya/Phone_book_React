@@ -1,113 +1,94 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './Navigation-panel.css';
 
-export default class NavigationPanel extends Component {
+export default function NavigationPanel(props) {
+
+    const [statusMessage, setStatusMessage] = useState('');
+    const [showMessage, setShowMessage]     = useState('');
+    const [isValid, setIsValid]             = useState(false);
+    const [number, setNumber]               = useState('');
+    const [name, setName]                   = useState('');
 
 
-    state = {
-        statusMessage : '',
-        showMessage   : '',
-        isValid       : false,
-        number        : '',
-        name          : ''
+    const changeInput = (e) => {
+        let input = e.target.name === 'contactName' ? setName : setNumber;
+
+        input(e.target.value);
     }
 
-
-    changeInput = (e) => {
-        let input = e.target.name === 'contactName' ? 'name' : 'number';
-
-        this.setState(() => {
-            return {
-                [input] : e.target.value
-            }
-        })
-    }
-
-    validation = (number) => {
+    const validation = (number) => {
         const regNum = new RegExp('^\\d+$');
 
         if(!!regNum.exec(number)){
-            this.setState({
-                showMessage : 'Контакт добавлен',
-                isValid     : true
-            })
+            setShowMessage('Контакт добавлен');
+            setIsValid(true);
+
             return true;
         }else{
-            this.setState({
-                showMessage : 'Укажите корректный номер телефона!',
-                isValid     : false
-            })
+            setShowMessage('Укажите корректный номер телефона!');
+            setIsValid(false);
+
             return false;
         }
 
     }
 
-
-    addedContact = (e) => {
+    const addedContact = (e) => {
         e.preventDefault()
 
-        const {name, number} = this.state;
-        const { contacts } = this.props;
+        const { contacts } = props;
 
         const duplicate = contacts.every(el => {
             return el.number !== number && el.name !== name;
         })
 
         if(!duplicate){
-            this.setState({
-                showMessage : 'Такой пользователь уже существует!',
-                isValid     : false
-            })
-        }else if (this.validation(number) && duplicate) {
-            this.props.addContact(name, number);
+            setShowMessage('Такой пользователь уже существует!');
+            setIsValid(false);
 
-            this.setState({
-                showMessage   : 'Контакт добавлен',
-                statusMessage : 'successMessage',
-                name          : '',
-                number        : '',
-                isValid       : true
-            })
+        }else if (validation(number) && duplicate) {
+            props.addContact(name, number);
+
+            setShowMessage('successMessage');
+            setStatusMessage('successMessage');
+            setShowMessage('Контакт добавлен');
+            setName('');
+            setNumber('');
+            setIsValid(true);
 
         } else {
-            this.setState({
-                statusMessage : 'errorMessage'
-            })
+            setStatusMessage('errorMessage');
         }
 
-        this.deleteStatusMessage();
+        deleteStatusMessage();
     }
 
-    deleteStatusMessage = () => {
+    const deleteStatusMessage = () => {
         setTimeout(() => {
-            this.setState({statusMessage: ''})
+            setStatusMessage('');
         }, 2000);
     }
 
-
-    render() {
-        const {statusMessage, name, number, showMessage, isValid} = this.state;
         const valid = isValid ? 'success-message' : 'error-message'
 
         return (
             <div className='navigation-panel__wrapper'>
                 <p className={valid}>{showMessage}</p>
-                <form action="" className='navigation-panel__form'>
-                    <input type="text"
+                <form action='' className='navigation-panel__form'>
+                    <input type='text'
                            name='contactName'
                            placeholder='Name'
                            className={statusMessage}
-                           onChange={this.changeInput}
+                           onChange={changeInput}
                            value={name}/>
-                    <input type="text"
+                    <input type='text'
                            name='contactNumber'
                            placeholder='Number'
                            className={statusMessage}
-                           onChange={this.changeInput}
+                           onChange={changeInput}
                            value={number}/>
-                    <button className='btn' onClick={this.addedContact}>Добавить</button>
+                    <button className='btn' onClick={addedContact}>Добавить</button>
                 </form>
             </div>
         );
-    }
-}
+};
